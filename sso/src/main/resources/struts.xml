@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="do,action,html"></constant>
+    <!--配置Struts的action -->
+    <package name="abc" namespace="/sso" extends="struts-default">
+        <action name="hello" class="com.sso.action.UserAction"
+                         method="hello">
+            <result name="success">${redirectUrl}</result>
+            <result name="error">page/error.jsp</result>
+        </action>
+        <action name="home" class="com.sso.action.UserAction" method="home">
+            <result name="success">page/index.jsp</result>
+        </action>
+        <action name="pageOne" class="com.sso.action.PageOne" method="pageOne">
+            <result name="success">page/pageOne.jsp</result>
+            <result name="login">page/login.jsp</result>
+        </action>
+        <action name="pageTwo" class="com.sso.action.PageTwo" method="pageTwo">
+            <result name="success">page/pageTwo.jsp</result>
+            <result name="login">page/login.jsp</result>
+        </action>
+    </package>
+
+</struts>
