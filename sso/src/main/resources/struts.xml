@@ -6,6 +6,7 @@
 <struts>
     <constant name="struts.action.extension" value="do,action,html"></constant>
     <!--配置Struts的action -->
+    <!-- 配置同域的SSO -->
     <package name="abc" namespace="/sso" extends="struts-default">
         <action name="hello" class="com.sso.action.UserAction"
                          method="hello">
@@ -20,6 +21,26 @@
             <result name="login">page/login.jsp</result>
         </action>
         <action name="pageTwo" class="com.sso.action.PageTwo" method="pageTwo">
+            <result name="success">page/pageTwo.jsp</result>
+            <result name="login">page/login.jsp</result>
+        </action>
+    </package>
+    <!-- 同父域的SSO -->
+    <package name="same" namespace="/same" extends="struts-default">
+        <action name="hello" class="com.same.action.UserAction"
+                method="hello">
+            <result name="success" type="redirect">${redirectUrl}</result>
+            <result name="error">page/error.jsp</result>
+        </action>
+        <action name="check" class="com.same.action.UserAction"
+                method="checkCookie">
+            <result name="error">page/error.jsp</result>
+        </action>
+        <action name="pageOne" class="com.same.action.PageOne" method="pageOne">
+            <result name="success">page/pageOne.jsp</result>
+            <result name="login">page/login.jsp</result>
+        </action>
+        <action name="pageTwo" class="com.same.action.PageTwo" method="pageTwo">
             <result name="success">page/pageTwo.jsp</result>
             <result name="login">page/login.jsp</result>
         </action>

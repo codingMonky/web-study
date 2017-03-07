@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.stock.manage</groupId>
-    <artifactId>outline</artifactId>
+    <groupId>com.web.study</groupId>
+    <artifactId>father</artifactId>
     <packaging>pom</packaging>
     <version>2017-1-18</version>
     <modules>
-        <module>webmanager</module>
-        <module>common</module>
+        <module>sso</module>
     </modules>
 
     <properties>
@@ -68,6 +67,9 @@
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>${tomcat.plugin.version}</version>
+                    <configuration>
+                        <port>80</port>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
