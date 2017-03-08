@@ -1,11 +1,10 @@
-package com.same.action;
+package com.diff.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -69,25 +68,11 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
         this.cookieValue = cookieValue;
     }
 
-    public String hello() {
+    public String login() {
         logger.debug("开始登陆");
-        if ("abc".equals(userName) && "123".equals(password)) {
-           Cookie cookie = new Cookie("sso","cookie");
-           cookie.setDomain(".x.com");
-           cookie.setPath("/");
-            response.addCookie(cookie);
-            logger.info("登陆成功");
-            return SUCCESS;
-        }
-        logger.debug("登陆失败");
-        return "error";
-    }
-
-    public String checkCookie()  {
-        logger.debug("开始校验Cookie");
         String result = "fail";
-        if("sso".equals(cookieName)&&"cookie".equals(cookieValue)){
-           result = "success";
+        if ("abc".equals(userName) && "123".equals(password)) {
+            result = "success";
         }
         try {
             response.getWriter().print(result);
@@ -95,11 +80,23 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.debug("登陆失败");
+        return null;
+    }
+
+    public String checkCookie() throws IOException {
+        logger.debug("开始校验Cookie");
+        String result = "fail";
+        if ("sso".equals(cookieName) && "cookie".equals(cookieValue)) {
+            result = "success";
+        }
+        response.getWriter().print(result);
+        response.getWriter().close();
         return null;
     }
 
 
     public void setServletResponse(HttpServletResponse httpServletResponse) {
-        this.response =  httpServletResponse;
+        this.response = httpServletResponse;
     }
 }

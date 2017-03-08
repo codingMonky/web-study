@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.action.extension" value="do,action,html"></constant>
+    <constant name="struts.action.extension" value="do,action,html"/>
     <!--配置Struts的action -->
     <!-- 配置同域的SSO -->
     <package name="abc" namespace="/sso" extends="struts-default">
@@ -14,7 +14,7 @@
             <result name="error">page/error.jsp</result>
         </action>
         <action name="home" class="com.sso.action.UserAction" method="home">
-            <result name="success">page/index.jsp</result>
+            <result name="success">index.jsp</result>
         </action>
         <action name="pageOne" class="com.sso.action.PageOne" method="pageOne">
             <result name="success">page/pageOne.jsp</result>
@@ -32,9 +32,8 @@
             <result name="success" type="redirect">${redirectUrl}</result>
             <result name="error">page/error.jsp</result>
         </action>
-        <action name="check" class="com.same.action.UserAction"
-                method="checkCookie">
-            <result name="error">page/error.jsp</result>
+        <action name="check" class="com.same.action.UserAction" method="checkCookie">
+
         </action>
         <action name="pageOne" class="com.same.action.PageOne" method="pageOne">
             <result name="success">page/pageOne.jsp</result>
@@ -45,5 +44,33 @@
             <result name="login">page/login.jsp</result>
         </action>
     </package>
-
+    <!--配置不同父域的SSO-->
+   <package name="pageOne" namespace="/diff/pageOne" extends="struts-default">
+        <action name="login" class="com.diff.action.PageOne" method="login">
+            <result name="success">/diff/page/pageOne.jsp</result>
+            <result name="login">/diff/page/loginOne.jsp</result>
+        </action>
+       <action  name="pageOne" class="com.diff.action.PageOne" method="pageOne">
+           <result name="success">/diff/page/pageOne.jsp</result>
+           <result name="login">/diff/page/loginOne.jsp</result>
+       </action>
+       <action name="addCookie" class="com.diff.action.PageOne" method="addCookie"></action>
+    </package>
+    <package name="pageTwo" namespace="/diff/pageTwo" extends="struts-default">
+        <action name="login" class="com.diff.action.PageTwo" method="login">
+            <result name="success">/diff/page/pageTwo.jsp</result>
+            <result name="login">/diff/page/loginTwo.jsp</result>
+        </action>
+        <action name="pageTwo" class="com.diff.action.PageTwo" method="pageTwo">
+            <result name="success">/diff/page/pageOne.jsp</result>
+            <result name="login">/diff/page/loginTwo.jsp</result>
+        </action>
+        <action name="addCookie" class="com.diff.action.PageTwo" method="addCookie"></action>
+    </package>
+    <package name="check" namespace="/diff" extends="struts-default">
+        <action name="check" class="com.diff.action.UserAction" method="checkCookie">
+        </action>
+        <action name="checkLogin" class="com.diff.action.UserAction" method="login">
+        </action>
+    </package>
 </struts>
